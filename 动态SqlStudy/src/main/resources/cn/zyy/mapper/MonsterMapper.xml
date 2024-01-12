@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zyy.mapper.MonsterMapper">
+    <!--
+        对指定id的妖怪进行修改，如果没有设置新的属性，则保持原来的值。
+
+    -->
+    <update id="updateMonster_set" parameterType="map">
+        UPDATE monster
+        <set>
+            <if test="name != null and name != ''">
+                name =#{name},
+            </if>
+            <if test="age != null and  age != ''">
+                age = #{age},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--请查询 age >10 的所有妖怪，如果程序员输入输入的age < 0 ，则输出所有的妖怪
+        复习：回顾整理if标签
+    -->
+    <select id="findMonsterByAge" parameterType="integer" resultType="cn.zyy.domain.Monster">
+        SELECT * FROM monster WHERE  1=1
+        <if test="age >0">
+            AND age > #{age}
+        </if>
+    </select>
+
+    <!--
+        查询id >20 并且  name=牛魔王的所有妖怪，注意：如果名字为空或者输入的id < 0 ,则不拼接SQL。
+        复习WHERE语句
+   -->
+    <select id="findMonsterByIdAndName" parameterType="cn.zyy.domain.Monster" resultType="cn.zyy.domain.Monster">
+        SELECT * FROM monster
+        <where>
+            <if test="id >=0">
+                AND id > #{id}
+            </if>
+            <if test="name != null and name != ''">
+                AND name = #{name}
+            </if>
+        </where>
+    </select>
+    <!-- - [ ]  需求： 如果给的name不为空，就按妖怪名字查。
+        如果指定的 id > 0 ,就按id来查询妖怪
+        如果前面的两个条件都不满足，就默认查询salary>100
+        要求使用choose/when/otherwise 标签来实现，传入参数要求使用Map -->
+    <select id="findMonsterByIdAndName_Choose"  parameterType="map" resultType="cn.zyy.domain.Monster">
+        SELECT * FROM monster
+        <choose>
+            <when test="name != null and name != '' ">
+                WHERE name = #{name}
+            </when>
+            <when  test="id > 0">
+                WHERE id > #{id}
+            </when>
+            <otherwise>
+                WHERE salary >1000
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--需求： 查询id为 20，22，34的妖怪-->
+    <select id="findMonsterById_foreach" parameterType="map" resultType="cn.zyy.domain.Monster">
+        SELECT * FROM monster
+        <if test="ids != null and ids !=''">
+            <where>
+               id IN 
+                <foreach collection="ids" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </where>
+        </if>
+    </select>
+</mapper>

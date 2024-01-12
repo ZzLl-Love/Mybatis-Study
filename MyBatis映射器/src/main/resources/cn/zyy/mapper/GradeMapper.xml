@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zyy.mapper.GradeMapper">
+    <resultMap id="basicMap" type="cn.zyy.domain.Grade">
+        <id property="gid" column="id"/>
+        <result property="name" column="name"/>
+        <!--获取学生信息-->
+        <collection property="students" ofType="cn.zyy.domain.Student">
+            <id property="sid" column="sId"/>
+            <result property="name" column="sName"/>
+            <result property="age" column="age"/>
+            <result property="classId" column="sId"/>
+        </collection>
+    </resultMap>
+    <!--查询一对多-->
+    <select id="getGradeIncludeStus" resultMap="basicMap">
+        SELECT
+            c.*, s.id sId, s.age, s.name sName, s.class_id sId
+        FROM
+            class  c left join student s on c.id = s.class_id
+        where c.id = #{id};
+    </select>
+
+    <!--查询多对一-->
+    <select id="selAllStusInclGrade" resultType="cn.zyy.domain.Student">
+
+    </select>
+</mapper>

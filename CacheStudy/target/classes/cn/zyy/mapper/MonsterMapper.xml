@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zyy.mapper.MonsterMapper">
+    <!--配置二级缓存-->
+    <cache
+            eviction="FIFO"
+            flushInterval="60000"
+            size="512"
+            readOnly="true"/>
+
+    <update id="updateMonster" parameterType="cn.zyy.domain.Monster" flushCache="true">
+        UPDATE
+            monster
+        SET
+            age = #{age}, birthday=#{birthday},email=#{email}, gender=#{gender},name=#{name},salary=#{salary}
+        WHERE
+            id = #{id};
+    </update>
+
+    <select id="getMonsterById" resultType="cn.zyy.domain.Monster">
+       SELECT * FROM  monster WHERE id = #{id};
+    </select>
+</mapper>

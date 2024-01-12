@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zyy.mapper.StudentMapper">
+
+    <resultMap id="basicMap" type="cn.zyy.domain.Student">
+        <id property="sid" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="classId" column="class_id"/>
+        <result property="grade.gid" column="gId"/>
+        <result property="grade.name" column="gName"/>
+    </resultMap>
+    <resultMap id="AssociationMap" type="cn.zyy.domain.Student">
+        <id property="sid" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="classId" column="class_id"/>
+        <association property="grade" javaType="cn.zyy.domain.Grade">
+            <id property="gid" column="gId"/>
+            <result property="name" column="gName"/>
+        </association>
+    </resultMap>
+    <select id="selAllStusInclGrade" resultMap="AssociationMap">
+        SELECT
+            stu.*, c.id gId, c.name gName
+        FROM
+            student stu left join class c on c.id = stu.class_id;
+    </select>
+
+    <!--###########-->
+    <!--#########-->
+    <!--#####-->
+    <!--###-->
+    <resultMap id="AssociationSelectMap" type="cn.zyy.domain.Student">
+        <id property="sid" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="classId" column="class_id"/>
+        <association property="grade" column="class_id" select="getClassById"/>
+    </resultMap>
+    <select id="getClassById" resultType="cn.zyy.domain.Grade">
+        select * from class where id = #{id};
+    </select>
+    <!--复习知识点：嵌套查询-->
+    <select id="listAllStusByAssociationSelect" resultMap="AssociationSelectMap">
+        select * from student;
+    </select>
+</mapper>

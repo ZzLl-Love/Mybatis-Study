@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../CacheStudy/CacheStudy.iml" filepath="$PROJECT_DIR$/../CacheStudy/CacheStudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyBatisQuick.iml" filepath="$PROJECT_DIR$/MyBatisQuick.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyBatis映射器/MyBatis映射器.iml" filepath="$PROJECT_DIR$/../MyBatis映射器/MyBatis映射器.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mybatis-quickstart-01/mybatis-quickstart-01.iml" filepath="$PROJECT_DIR$/mybatis-quickstart-01/mybatis-quickstart-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../动态SqlStudy/动态SqlStudy.iml" filepath="$PROJECT_DIR$/../动态SqlStudy/动态SqlStudy.iml" />
+    </modules>
+  </component>
+</project>

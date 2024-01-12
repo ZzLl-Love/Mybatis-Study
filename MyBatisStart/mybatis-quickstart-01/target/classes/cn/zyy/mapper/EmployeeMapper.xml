@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zyy.mapper.EmployeeMapper">
+    <insert id="insert">
+        insert into employee value(null, #{emp.name}, #{emp.age}, #{emp.address});
+    </insert>
+    <update id="update">
+        update employee set name = #{emp.name} where id = #{emp.id};
+    </update>
+    <delete id="delete">
+        delete from employee where id = #{id}
+    </delete>
+    <select id="selectEmployee" resultType="cn.zyy.domain.Employee">
+       select * from employee where id =#{id};
+    </select>
+</mapper>

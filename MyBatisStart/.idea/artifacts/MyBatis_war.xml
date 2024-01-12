@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="MyBatis映射器:war">
+    <output-path>$PROJECT_DIR$/../MyBatis映射器/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>MyBatis映射器</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="MyBatisxmlMapperFile-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="MyBatis映射器:war exploded" />
+    </root>
+  </artifact>
+</component>

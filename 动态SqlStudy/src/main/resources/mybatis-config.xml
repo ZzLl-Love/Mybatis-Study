@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--引入db.properties配置文件-->
+    <properties resource="db.properties"></properties>
+    <settings>
+        <!--开启下划线转驼峰-->
+        <!--<setting name="mapUnderscoreToCamelCase" value="true"/>-->
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    <!--类型别名-->
+    <typeAliases>
+        <!--给domain包取别名-->
+        <package name="cn.zyy.domain"/>
+    </typeAliases>
+    <environments default="mysql">
+        <environment id="mysql">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--<mapper resource="cn/zyy/mapper/MonsterMapper.xml"></mapper>-->
+        <!--<mapper resource="cn/zyy/mapper/GradeMapper.xml"/>-->
+        <!--将包内的映射器接口全部注册为映射器-->
+        <package name="cn.zyy.mapper"></package>
+    </mappers>
+</configuration>

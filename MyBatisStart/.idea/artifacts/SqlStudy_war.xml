@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="动态SqlStudy:war">
+    <output-path>$PROJECT_DIR$/../动态SqlStudy/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>动态SqlStudy</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="trendsSqlStudy-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="动态SqlStudy:war exploded" />
+    </root>
+  </artifact>
+</component>
